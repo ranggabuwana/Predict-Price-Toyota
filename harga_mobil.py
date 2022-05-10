@@ -3,7 +3,7 @@ import streamlit as st
 from pyngrok import ngrok
 from joblib import load
 
-trained_model = load("/content/Model_price.pkl")
+trained_model = load("Model_toyota.pkl")
 
 form = st.form(key='my-form')
 
@@ -33,10 +33,10 @@ fuelType = {'Petrol': 3, 'Other': 2, 'Hybrid': 1, 'Diesel': 0}
 if Fuel:
   fuel = fuelType[Fuel]
 
-mile = form.text_input("Masukkan mileage: ")
+mile = form.text_input("Masukkan mileage (Km): ")
 tax = form.text_input("Masukkan tax: ")
-mpg = st.slider("Masukkan mpg: ", 2.8, 235.0)
-engSize = st.slider("Masukkan engineSize: ", 0.0, 4.5)
+mpg = st.slider("Masukkan mpg (litres): ", 2.8, 235.0)
+engSize = st.slider("Masukkan engineSize (litre): ", 0.0, 4.5)
 
 submit = form.form_submit_button("Cek Harga")
 
@@ -50,8 +50,8 @@ if submit:
     int(tax),
     float(mpg), 
     float(engSize)]])
-  st.write("Hasil harga:")
+  st.write("Kategori Harga:")
   st.write(hasil_akhir[0])
 
-ngrok_tunnel = ngrok.connect(8501)
-print('Public URL:', ngrok_tunnel.public_url)
+# ngrok_tunnel = ngrok.connect(8501)
+# print('Public URL:', ngrok_tunnel.public_url)
